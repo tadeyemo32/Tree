@@ -17,8 +17,8 @@ endif
 
 ifeq ($(OS),Windows_NT)
     CC = gcc
-    CFLAGS += -I./raylib/include
-    LDFLAGS = -L./raylib/lib
+    CFLAGS += -I./raylib/raylib-4.5.0_win64_mingw-w64/include
+    LDFLAGS = -L./raylib/raylib-4.5.0_win64_mingw-w64/lib
     LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
     OUT := main.exe
 endif
