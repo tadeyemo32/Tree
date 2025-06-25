@@ -27,4 +27,5 @@ $(OUT): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(OUT) $(LDFLAGS) $(LIBS)
 
 clean:
+
 	rm -f $(OUT)
