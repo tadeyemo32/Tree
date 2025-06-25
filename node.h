@@ -9,6 +9,8 @@ typedef struct Node {
     struct Node* left;
     struct Node* right;
     bool visited;
+        int x, y;
+
 } Node;
 
 Node* createNode(int value);
