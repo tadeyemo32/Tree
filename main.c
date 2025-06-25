@@ -1,73 +1,33 @@
+// main.c
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "raylib.h"
+#include "node.h"
+#include "queue.h"
 
-#define NODE_RADIUS 20
-#define V_SPACING 80
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-#define BUTTON_WIDTH 100
-#define BUTTON_HEIGHT 40
-#define BUTTON_SPACING 20
+void bfs(Node* root) {
+    if (root == NULL) return;
 
+    Queue q;
+    initQueue(&q);
+    enQueue(&q, root);
 
+    printf("\nBFS Traversal:\n");
 
+    while (!isQueueEmpty(&q)) {
+        Node* current = deQueue(&q);
+        printf("%d ", current->value);
 
-typedef struct Node {
-    int value;
-    struct Node* left;
-    struct Node* right;
-} Node;
+        if (current->left)
+            enQueue(&q, current->left);
+        if (current->right)
+            enQueue(&q, current->right);
+    }
 
-
-
-
-Node* createNode(int data) {
-    Node* newNode = malloc(sizeof(Node));
-    newNode->value = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
+    printf("\n");
 }
 
-Node* insertNode(Node *root, int data) {
-    if (root == NULL) return createNode(data);
-
-    if (data < root->value)
-        root->left = insertNode(root->left, data);
-    else if (data > root->value)
-        root->right = insertNode(root->right, data);
-
-    return root;
-}
-void printTree(Node* root, int space) {
-    if (root == NULL)
-        return;
-
-    int indent = 5;
-
-    // Print right child first (top of tree)
-    printTree(root->right, space + indent);
-
-    // Print current node
-    for (int i = 0; i < space; i++)
-        printf(" ");
-    printf("%d\n", root->value);
-
-    // Then print left child
-    printTree(root->left, space + indent);
-}
-
-
-
-
-
-
-
-
-int main(void) {
+int main() {
     Node* root = NULL;
+
     root = insertNode(root, 50);
     root = insertNode(root, 30);
     root = insertNode(root, 70);
@@ -75,6 +35,9 @@ int main(void) {
     root = insertNode(root, 40);
     root = insertNode(root, 60);
     root = insertNode(root, 80);
-printTree(root,0);
 
+    printTree(root, 0);
+    bfs(root);
+    freeTree(root);
+    return 0;
 }
