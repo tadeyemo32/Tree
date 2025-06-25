@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -Wall -std=c99 
+CFLAGS = -Wall -std=c99
 SRC = main.c node.c queue.c
 OUT = main
 
@@ -16,8 +16,11 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 ifeq ($(OS),Windows_NT)
+    CC = gcc
+    CFLAGS += -I./raylib/include
+    LDFLAGS = -L./raylib/lib
     LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
-    OUT := game.exe
+    OUT := main.exe
 endif
 
 $(OUT): $(SRC)
