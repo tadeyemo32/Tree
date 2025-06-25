@@ -16,11 +16,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install raylib on Linux
+      - name: Install raylib on Ubuntu (build from source)
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y build-essential libraylib-dev
+          sudo apt install -y git build-essential libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxi-dev libxinerama-dev libxxf86vm-dev
+          git clone https://github.com/raysan5/raylib.git
+          cd raylib/src
+          make PLATFORM=PLATFORM_DESKTOP
+          sudo make install
+
+      - name: Install raylib via Homebrew on macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew install raylib
 
       - name: Install dependencies on Windows
         if: runner.os == 'Windows'
@@ -28,10 +37,9 @@ jobs:
           choco install mingw
           choco install make
 
-      - name: Set up environment variables (Windows)
+      - name: Set compiler for Windows
         if: runner.os == 'Windows'
-        run: |
-          echo "CC=gcc" >> $GITHUB_ENV
+        run: echo "CC=gcc" >> $GITHUB_ENV
 
       - name: Build project
         run: make
