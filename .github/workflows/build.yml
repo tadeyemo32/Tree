@@ -1,0 +1,25 @@
+name: Cross-platform Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install raylib (Linux only)
+        if: runner.os == 'Linux'
+        run: sudo apt install libraylib-dev
+
+      - name: Build on all platforms
+        run: |
+          make
