@@ -20,11 +20,18 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y libraylib-dev
+          sudo apt install -y build-essential libraylib-dev
 
       - name: Install dependencies on Windows
         if: runner.os == 'Windows'
-        run: choco install make
+        run: |
+          choco install mingw
+          choco install make
+
+      - name: Set up environment variables (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          echo "CC=gcc" >> $GITHUB_ENV
 
       - name: Build project
         run: make
