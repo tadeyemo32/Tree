@@ -100,4 +100,5 @@ int main() {
     CloseWindow();
     freeTree(root);
     return 0;
+    
 }
