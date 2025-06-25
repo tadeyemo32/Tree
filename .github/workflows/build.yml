@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -14,12 +13,18 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Install raylib (Linux only)
+      - name: Install raylib on Linux
         if: runner.os == 'Linux'
-        run: sudo apt install libraylib-dev
-
-      - name: Build on all platforms
         run: |
-          make
+          sudo apt update
+          sudo apt install -y libraylib-dev
+
+      - name: Install dependencies on Windows
+        if: runner.os == 'Windows'
+        run: choco install make
+
+      - name: Build project
+        run: make
