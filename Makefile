@@ -1,4 +1,4 @@
-CC = clang
+CC = gcc
 CFLAGS = -Wall -std=c99
 SRC = main.c node.c queue.c
 OUT = main
@@ -27,5 +27,4 @@ $(OUT): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(OUT) $(LDFLAGS) $(LIBS)
 
 clean:
-
 	rm -f $(OUT)
