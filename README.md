@@ -1,10 +1,10 @@
-# Binary Tree Traversal Visualizer 🌲
+# Binary Tree Traversal Visualizer 
 
 This project is a graphical visualizer for Breadth-First Search (BFS) traversal on a binary tree, built using C and [raylib](https://www.raylib.com/). It allows you to visually explore how nodes are visited in BFS order by clicking a button.
 
 ---
 
-## 🔍 Features
+##  Features
 
 - Build and render a binary tree using a simple structure
 - BFS traversal with animation (nodes light up green one by one)
@@ -14,7 +14,7 @@ This project is a graphical visualizer for Breadth-First Search (BFS) traversal 
 
 ---
 
-## 🖼️ Demo
+##  Demo
 
 ![screenshot](./assets/1.png)
 
@@ -24,9 +24,9 @@ Or an animated demo:
 
 ---
 
-## 🛠 Build Instructions
+##  Build Instructions
 
-### ✅ Prerequisites
+###  Prerequisites
 
 Install **raylib** for your OS.
 
